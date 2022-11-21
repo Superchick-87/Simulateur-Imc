@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<h1 class="valeur">Quel est mon IMC ?</h1>
+		<div ng-app="">
+	 		<div class="cartouche jaune">
+		 		<p>Je mesure (en cm)...</p>
+				<input oninput="recup(this)" type="number" ng-model="taille" data-ng-init="taille=0" maxlength = "3" min="0">
+				<p>... et je pèse (en kg)</p>
+				<input oninput="recup(this)" type="number" ng-model="poids" data-ng-init="poids=0" maxlength = "3" min="0">
+				<h1 id="done" class="valeur cartoucheDone jauneClaire" style="display: none;" ng-model="done" data-ng-init="done=10">{{poids/((taille/100)*(taille/100)) | number:'':'fr-FR'}}</h1>
+				<p>Les personnes ayant un indice de masse corporelle supérieur à 30 ont un accès prioritaire à la vaccination.</p>
+			</div>
+		</div>
+	<footer></footer>
+	</body>
+	<script type="text/javascript">
+	var done = document.getElementById("done");
+		console.log(done.value);
+	function recup(data){
+  		var data = document.getElementsByTagName("input");
+		// console.log(data[0].value);
+		// console.log(data[1].innerHTML);
+		var done = document.getElementById("done");
+		// console.log(done.innerHTML);
+		if (data[0].value === '' | data[1].value === '') {
+			done.style.display = "none";
+		}
+		if (data[0].value === '0' | data[1].value === '0') {
+			done.style.display = "none";
+		}
+		else{
+			done.style.display = "block";
+		}
+	}
+	</script>
+	<script>
+		angular.module('test', [])
+    	.controller('test', ['$scope', function ($scope) {
+    	$scope.data = [
+    	{name: '0', id: 0},
+    	{name: '5', id: 5},
+    	{name: '10', id: 10},
+    	{name: '15', id: 15},
+    	{name: '20', id: 20},
+    	{name: '25', id: 25},
+    	{name: '30', id: 30},
+    	{name: '35', id: 35},
+    	{name: '40', id: 40},
+    	{name: '45', id: 45},
+    	{name: '50', id: 50},
+    	{name: '55', id: 55},
+    	{name: '60', id: 60},
+    	{name: '65', id: 65},
+    	{name: '70', id: 70},
+    	{name: '75', id: 75},
+    	{name: '80', id: 80},
+    	{name: '85', id: 85},
+    	{name: '90', id: 90},
+    	{name: '95', id: 95},
+    	{name: '100', id: 100}
+    	];
+    	
+    	$scope.selectEntireObject = $scope.data[0];
+        $scope.selectJustId = $scope.data[0].id;
+    	}]);
+	</script>
+
+
+	<script>
+	  function maxLengthCheck(object)
+	  {
+	    if (object.value.length > object.maxLength)
+	      object.value = object.value.slice(-2, object.maxLength)
+	  }
+</script>
+</html>
